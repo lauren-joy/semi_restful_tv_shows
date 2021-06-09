@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Show Info</title>
+</head>
+<body>
+<div class="wrapper">
+    <div class="header">
+        <h1>Tv Show {{show_id}}</h1>
+        <a href="/shows">Go Back</a>
+    </div>
+    <div class="showInfo">
+        <h4>Title</h4>
+            <p>{{show.title}}</p>
+        <h4>Network</h4>
+            <p>{{show.network}}</p>
+        <h4>Release Date</h4>
+            <p>{{show.release_date|date:"SHORT_DATE_FORMAT"}}</p>
+        <h4>Description</h4>
+            <p>{{show.description}}</p>
+    </div>
+    <div class="update">
+        <p>Last Updated: {{show.updated_at}} </p>
+    </div>
+    <a href="/shows/{{show.id}}/edit">Edit</a> <span>|</span>
+    <a href="/shows/{{show.id}}/delete">Delete</a>
+</div>
+</body>
+</html>

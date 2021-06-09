@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Edit Show</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <h1>Edit Show {{show_id}}</h1>
+            <a href="/shows">Go Back</a>
+        </div>
+{% if messages %}
+<ul class="messages">    
+    {% for message in messages %}    
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+    {% endfor %}
+</ul>
+{% endif %}
+        <form action="/shows/{{show.id}}/update" method="POST">
+            {% csrf_token %}
+            <h5>Title</h5>
+            <input type="text" name="title" id="title" value="{{show.title}}">
+            <h5>Network</h5>
+            <input type="text" name="network" id="network" value="{{show.network}}">
+            <h5>Release Date</h5>
+            <input type="date" name="release_date" id="release_date" value="{{show.release_date|date:'Y-m-d'}}">
+            <h5>Description</h5>
+            <textarea name="description" id="description" cols="80" rows="5" placeholder="{{show.description}}"></textarea>
+            <button class="btn btn-outline-light">Update</button>
+        </form>
+        <a href="/shows/{{show.id}}">Go to Show</a>
+    </div>
+</body>
+</html>
